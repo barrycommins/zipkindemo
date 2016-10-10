@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: zipkin-server
+server:
+  port: 9411
+---
+spring:
+  profiles: docker
+  cloud:
+    stream:
+      kafka:
+        binder:
+          zk-nodes: ${DOCKER_HOST_IP:0.0.0.0}:2181
+          brokers: ${DOCKER_HOST_IP:0.0.0.0}:9092
