@@ -14,4 +14,4 @@ The ```docker-compose.yml``` file contains the two applications, Kafka and Zooke
 
 It can be run by first building the application containers with ```mvn clean install``` and then running everything with ```docker-compose up```
 
-```$DOCKER_HOST_IP``` should be set to the ip of your docker machine if you are using Windows or Mac, or to 0.0.0.0 on Linux.
+```$DOCKER_HOST_IP``` should be set to the ip of your docker machine if you are using Windows or Mac, or to the host ip on Linux.
