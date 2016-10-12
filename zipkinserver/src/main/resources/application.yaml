@@ -1,6 +1,9 @@
 spring:
   application:
     name: zipkin-server
+  sleuth:
+    stream:
+      enabled: false
 server:
   port: 9411
 ---
@@ -12,3 +15,14 @@ spring:
         binder:
           zk-nodes: ${DOCKER_HOST_IP:0.0.0.0}:2181
           brokers: ${DOCKER_HOST_IP:0.0.0.0}:9092
+zipkin:
+  storage:
+    cassandra3:
+      contact-points: ${DOCKER_HOST_IP:0.0.0.0}
+---
+spring:
+  profiles:
+    active: cassandra
+zipkin:
+  storage:
+    type: cassandra3

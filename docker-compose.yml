@@ -11,9 +11,12 @@ services:
     image: barrycommins/zipkinserver
     ports:
       - "9411:9411"
+    depends_on :
+      - cassandra
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=docker,cassandra
       - DOCKER_HOST_IP=$DOCKER_HOST_IP
+      - ZIPKIN_STORAGE_CASSANDRA3_CONTACT_POINTS=cassandra
 
   zookeeper:
     image: confluentinc/cp-zookeeper:3.0.1
@@ -33,3 +36,8 @@ services:
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$DOCKER_HOST_IP:9092
       - KAFKA_ADVERTISED_HOST_NAME=$DOCKER_HOST_IP
       - KAFKA_CREATE_TOPICS="sleuth:1:1"
+
+  cassandra:
+    image: cassandra
+    ports:
+      - "9042:9042"
